@@ -368,4 +368,10 @@ public static class LKConstants
     public const string AddSocialLink = "AddSocialLink";
     public const string SocialNetworkLink = "SocialNetworkLink";
 
+    public const string Fcm = "Fcm";
+    public const string FcmTopics = "FcmTopics";
+    public const string FcmMessageLogs = "FcmMessageLogs";
+    public const string FcmUserDeviceTokens = "FcmUserDeviceTokens";
+    public const string FcmUserTopics = "FcmUserTopics";
+    public const string FcmDeviceTokenTopics = "FcmDeviceTokenTopics";
 }

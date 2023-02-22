@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VinaCent.Blaze.EntityFrameworkCore;
 
@@ -11,9 +12,10 @@ using VinaCent.Blaze.EntityFrameworkCore;
 namespace VinaCent.Blaze.Migrations
 {
     [DbContext(typeof(BlazeDbContext))]
-    partial class BlazeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230222164609_Update.AddFcm")]
+    partial class UpdateAddFcm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1714,25 +1716,6 @@ namespace VinaCent.Blaze.Migrations
                     b.ToTable("AbpUsers");
                 });
 
-            modelBuilder.Entity("VinaCent.Blaze.FirebaseCloudMessage.FcmDeviceTokenTopic", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("DeviceToken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("TopicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TopicId");
-
-                    b.ToTable("FCM.FcmDeviceTokenTopic");
-                });
-
             modelBuilder.Entity("VinaCent.Blaze.FirebaseCloudMessage.FcmMessageLog", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2117,17 +2100,6 @@ namespace VinaCent.Blaze.Migrations
                     b.Navigation("DeleterUser");
 
                     b.Navigation("LastModifierUser");
-                });
-
-            modelBuilder.Entity("VinaCent.Blaze.FirebaseCloudMessage.FcmDeviceTokenTopic", b =>
-                {
-                    b.HasOne("VinaCent.Blaze.FirebaseCloudMessage.FcmTopic", "Topic")
-                        .WithMany()
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Topic");
                 });
 
             modelBuilder.Entity("VinaCent.Blaze.FirebaseCloudMessage.FcmUserDeviceToken", b =>

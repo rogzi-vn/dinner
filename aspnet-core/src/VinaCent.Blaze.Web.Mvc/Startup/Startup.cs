@@ -23,6 +23,10 @@ using Newtonsoft.Json.Serialization;
 using VinaCent.Blaze.Web.Contributors.ProfileManagement;
 using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using System.IO;
+using VinaCent.Blaze.Web.FirebaseCloudMessage;
 
 namespace VinaCent.Blaze.Web.Startup
 {
@@ -85,13 +89,15 @@ namespace VinaCent.Blaze.Web.Startup
                 options.Contributors.Add(new ProfileManagementPageContributor());
             });
 
-            
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
                     options.LoginPath = "/account/login";
                     options.ExpireTimeSpan = TimeSpan.FromDays(30);
                 });
+
+            services.AddTransient<IFcmService, FcmService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)

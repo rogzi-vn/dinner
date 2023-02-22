@@ -9,7 +9,7 @@ public class AdminCpPageNames
 
     public const string Tenants = "Tenants";
 
-    public const string IdentityManagement = "IdentityManagement"; 
+    public const string IdentityManagement = "IdentityManagement";
     public const string Users = "Users";
     public const string Roles = "Roles";
     public const string SecurityLogs = "SecurityLogs";
@@ -28,4 +28,11 @@ public class AdminCpPageNames
     public const string EmailConfiguration = "EmailConfiguration";
     public const string EmailConfiguration_SetUpMailServer = "EmailConfiguration.SetUpMailServer";
     public const string EmailConfiguration_TextTemplates = "EmailConfiguration.TextTemplates";
+
+    public const string Fcm = "FCM";
+    public const string FcmMessageLogs = "FCM.FcmMessageLogs";
+    public const string FcmTopics = "FCM.FcmTopics";
+    public const string FcmUserDeviceTokens = "FCM.FcmUserDeviceTokens";
+    public const string FcmUserTopics = "FCM.FcmUserTopics";
+    public const string FcmDeviceTokenTopics = "FCM.FcmDeviceTokenTopics";
 }

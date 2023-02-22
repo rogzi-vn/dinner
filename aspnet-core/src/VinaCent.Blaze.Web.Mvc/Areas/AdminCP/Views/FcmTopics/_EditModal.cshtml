@@ -1,0 +1,26 @@
+﻿@using VinaCent.Blaze.AppCore.Languages.Dto
+@using VinaCent.Blaze.FirebaseCloudMessage.FcmTopics.Dto;
+@using VinaCent.Blaze.Web.Areas.AdminCP.Models.Languages
+@using VinaCent.Blaze.Web.Models.Common.Modals
+@model FcmTopicDto
+@{
+    Layout = null;
+}
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("UpdateFcmTopic")))
+<form role="form" class="form-horizontal">
+    <input type="hidden" asp-for="Id" />
+    <div class="modal-body">
+        <div class="required mb-3">
+            <label class="form-label" asp-for="DisplayName"></label>
+            <input type="text" asp-for="DisplayName" class="form-control" />
+            <span asp-validation-for="DisplayName" class="invalid-feedback"></span>
+        </div>
+        <div class="required mb-3">
+            <label class="form-label" asp-for="Desciption"></label>
+            <textarea type="text" asp-for="Desciption" class="form-control"></textarea>
+            <span asp-validation-for="Desciption" class="invalid-feedback"></span>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+</form>
+<script src="~/libs/jquery-validate/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>

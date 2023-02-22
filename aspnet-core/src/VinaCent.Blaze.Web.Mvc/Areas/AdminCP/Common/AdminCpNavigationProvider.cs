@@ -168,6 +168,51 @@ public class AdminCpNavigationProvider : NavigationProvider
                         )
                     )
                 )
+            ).AddItem(
+                new MenuItemDefinition(
+                    AdminCpPageNames.Fcm,
+                    L(LKConstants.Fcm),
+                    icon: "mdi mdi-wrench"
+                ).AddItem(
+                    new MenuItemDefinition(
+                        AdminCpPageNames.FcmTopics,
+                        L(LKConstants.FcmTopics),
+                        url: "admincp/fcm/topics",
+                        icon: "mdi mdi-store-cog"
+                    )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        AdminCpPageNames.FcmUserDeviceTokens,
+                        L(LKConstants.FcmUserDeviceTokens),
+                        url: "admincp/fcm/user-device-tokens",
+                        icon: "mdi mdi-store-cog",
+                        order: 1
+                    )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        AdminCpPageNames.FcmDeviceTokenTopics,
+                        L(LKConstants.FcmDeviceTokenTopics),
+                        url: "admincp/fcm/device-token-topics",
+                        icon: "mdi mdi-store-cog",
+                        order: 2
+                    )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        AdminCpPageNames.FcmUserTopics,
+                        L(LKConstants.FcmUserTopics),
+                        url: "admincp/fcm/user-topics",
+                        icon: "mdi mdi-store-cog",
+                        order: 3
+                    )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        AdminCpPageNames.FcmMessageLogs,
+                        L(LKConstants.FcmMessageLogs),
+                        url: "admincp/fcm/message-logs",
+                        icon: "mdi mdi-store-cog",
+                        order: 4
+                    )
+                )
             );
 
         context.Manager.Menus.Add(nameof(AdminCP), adminCpMenuDefinition);

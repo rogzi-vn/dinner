@@ -1,0 +1,30 @@
+﻿@using VinaCent.Blaze.AppCore.Languages.Dto
+@using VinaCent.Blaze.FirebaseCloudMessage.FcmTopics.Dto;
+@using VinaCent.Blaze.Web.Areas.AdminCP.Models.Languages
+@using VinaCent.Blaze.Web.Models.Common.Modals
+@model FcmTopicDto
+@{
+    Layout = null;
+}
+<div class="modal fade create-modal" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewFcmTopic")))
+            <form role="form" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="required mb-3">
+                        <label class="form-label" asp-for="DisplayName"></label>
+                        <input type="text" asp-for="DisplayName" class="form-control" />
+                        <span asp-validation-for="DisplayName" class="invalid-feedback"></span>
+                    </div>
+                    <div class="required mb-3">
+                        <label class="form-label" asp-for="Desciption"></label>
+                        <textarea type="text" asp-for="Desciption" class="form-control"></textarea>
+                        <span asp-validation-for="Desciption" class="invalid-feedback"></span>
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>
