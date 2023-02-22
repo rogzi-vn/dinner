@@ -3,7 +3,6 @@
 @model SidebarControlMenuViewModel
 @{
     var orderedAdminCpMenuItems = Model.AdminCpMenu.Items.Where(x => x.IsVisible).ToList();
-    var orderedBusinessCpMenuItems = Model.BusinessCpMenu.Items.Where(x => x.IsVisible).ToList();
 }
 
 <div class="app-menu navbar-menu">
@@ -16,11 +15,6 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">@L(LKConstants.AdminCP)</span></li>
                 @foreach (var item in orderedAdminCpMenuItems)
-                {
-                    @await Html.PartialAsync("~/Themes/Velzon/Components/VelzonLeftSidebar/_MenuItem.cshtml", item)
-                }
-                <li class="menu-title"><span data-key="t-menu">@L(LKConstants.BusinessCP)</span></li>
-                @foreach (var item in orderedBusinessCpMenuItems)
                 {
                     @await Html.PartialAsync("~/Themes/Velzon/Components/VelzonLeftSidebar/_MenuItem.cshtml", item)
                 }

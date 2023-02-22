@@ -18,7 +18,7 @@ namespace VinaCent.Blaze.EntityFrameworkCore.Seed.Host
             return new List<ApplicationLanguage>
             {
                 new(tenantId, "en-US", "English", "us.svg"),
-                new(tenantId, "vi-VN", "English", "vn.svg"),
+                new(tenantId, "vi-VN", "Tiếng việt", "vn.svg"),
             };
         }
 

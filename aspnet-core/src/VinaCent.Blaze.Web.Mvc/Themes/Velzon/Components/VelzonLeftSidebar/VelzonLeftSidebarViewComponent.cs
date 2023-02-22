@@ -27,8 +27,7 @@ public class VelzonLeftSidebarViewComponent : AbpViewComponent
         {
             var model = new SidebarControlMenuViewModel
             {
-                AdminCpMenu = await _userNavigationManager.GetMenuAsync(nameof(Areas.AdminCP), _abpSession.ToUserIdentifier()),
-                BusinessCpMenu = await _userNavigationManager.GetMenuAsync(nameof(Areas.BusinessCP), _abpSession.ToUserIdentifier())
+                AdminCpMenu = await _userNavigationManager.GetMenuAsync(nameof(Areas.AdminCP), _abpSession.ToUserIdentifier())
             };
 
             return View($"~/Themes/Velzon/Components/{nameof(VelzonLeftSidebarViewComponent).Replace("ViewComponent", "")}/ControlDefault.cshtml", model);

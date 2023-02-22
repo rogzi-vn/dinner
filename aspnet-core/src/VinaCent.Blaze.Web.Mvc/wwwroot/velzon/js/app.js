@@ -13,7 +13,7 @@ File: Main Js File
     /**
      *  global variables
      */
-    var navbarMenuHTML = document.querySelector(".navbar-menu").innerHTML;
+    var navbarMenuHTML = document.querySelector(".navbar-menu")?.innerHTML;
     var horizontalMenuSplit = 7; // after this number all horizontal menus will be moved in More menu options
 
     function pluginData() {
@@ -306,7 +306,9 @@ File: Main Js File
         var defaultValues = JSON.parse(isValues);
 
         if (defaultValues && (isTwoColumn == "twocolumn" || defaultValues["data-layout"] == "twocolumn")) {
-            document.querySelector(".navbar-menu").innerHTML = navbarMenuHTML;
+            if (document.querySelector(".navbar-menu")) {
+                document.querySelector(".navbar-menu").innerHTML = navbarMenuHTML;
+            }
 
             var ul = document.createElement("ul");
             ul.innerHTML = '<a href="#" class="logo"><img src="assets/images/logo-sm.png" alt="" height="22"></a>';
@@ -529,7 +531,9 @@ File: Main Js File
          */
         if (document.documentElement.getAttribute("data-layout") == "vertical") {
             document.getElementById("two-column-menu").innerHTML = "";
-            document.querySelector(".navbar-menu").innerHTML = navbarMenuHTML;
+            if (document.querySelector(".navbar-menu")) {
+                document.querySelector(".navbar-menu").innerHTML = navbarMenuHTML;
+            }
 
             document.getElementById("scrollbar").setAttribute("data-simplebar", "");
             document.getElementById("navbar-nav").setAttribute("data-simplebar", "");
@@ -973,7 +977,9 @@ File: Main Js File
 
     function updateHorizontalMenus() {
         document.getElementById("two-column-menu").innerHTML = "";
-        document.querySelector(".navbar-menu").innerHTML = navbarMenuHTML;
+        if (document.querySelector(".navbar-menu")) {
+            document.querySelector(".navbar-menu").innerHTML = navbarMenuHTML;
+        }
 
         document.getElementById("scrollbar").removeAttribute("data-simplebar");
         document.getElementById("navbar-nav").removeAttribute("data-simplebar");
@@ -1012,7 +1018,9 @@ File: Main Js File
     function hideShowLayoutOptions(dataLayout) {
         if (dataLayout == "vertical") {
             document.getElementById("two-column-menu").innerHTML = "";
-            document.querySelector(".navbar-menu").innerHTML = navbarMenuHTML;
+            if (document.querySelector(".navbar-menu")) {
+                document.querySelector(".navbar-menu").innerHTML = navbarMenuHTML;
+            }
             if (document.getElementById("theme-settings-offcanvas")) {
                 document.getElementById("sidebar-size").style.display = "block";
                 document.getElementById("sidebar-view").style.display = "block";

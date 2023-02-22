@@ -2,7 +2,7 @@
 {
     public static class VelzonConsts
     {
-        public static string[] CPAreas = new[] { nameof(Areas.AdminCP), nameof(Areas.BusinessCP) };
+        public static string[] CPAreas = new[] { nameof(Areas.AdminCP) };
 
         public static class LayoutDirections
         {
