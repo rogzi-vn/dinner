@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services;
 using Abp.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,12 @@ namespace VinaCent.Blaze.FirebaseCloudMessage.FcmUserDeviceTokens
     {
         public FcmUserDeviceTokenAppService(IRepository<FcmUserDeviceToken, Guid> repository) : base(repository)
         {
+        }
+
+        [AllowAnonymous]
+        public async Task<FcmUserDeviceTokenDto> AddToken(FcmUserDeviceTokenDto token)
+        {
+            return await CreateAsync(token);
         }
     }
 }

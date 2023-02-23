@@ -27,6 +27,7 @@ using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using System.IO;
 using VinaCent.Blaze.Web.FirebaseCloudMessage;
+using VinaCent.Blaze.FirebaseCloudMessage.FirebaseCloudMessage;
 
 namespace VinaCent.Blaze.Web.Startup
 {
@@ -96,8 +97,6 @@ namespace VinaCent.Blaze.Web.Startup
                     options.LoginPath = "/account/login";
                     options.ExpireTimeSpan = TimeSpan.FromDays(30);
                 });
-
-            services.AddTransient<IFcmService, FcmService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
@@ -131,7 +130,7 @@ namespace VinaCent.Blaze.Web.Startup
             {
                 endpoints.MapHub<AbpCommonHub>("/signalr");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("defaultWithArea", "{area=AdminCP}/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

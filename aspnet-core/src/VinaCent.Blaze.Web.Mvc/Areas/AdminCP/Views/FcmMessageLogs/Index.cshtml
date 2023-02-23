@@ -1,5 +1,130 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Abp.Json
+@using VinaCent.Blaze.AppCore.Languages.Dto
+@using VinaCent.Blaze.FirebaseCloudMessage.FcmMessageLogs.Dto;
+@using VinaCent.Blaze.FirebaseCloudMessage;
+@using VinaCent.Blaze.FirebaseCloudMessage.FirebaseCloudMessage.Dto;
+@using VinaCent.Blaze.Web.Areas.AdminCP.Common
+@using VinaCent.Blaze.Web.Areas.AdminCP.Models.Languages
+@using VinaCent.Blaze.Web.Themes.Velzon.ThemeOptions
+@inject IVelzonThemeOptions ThemeOptions
+
+@model FcmMsgBody
+
 @{
+    ThemeOptions.AddBreadcrumb(L(LKConstants.AdminCP)).AddBreadcrumb(L(LKConstants.FcmMessageLogs)).Commit(this);
+    ViewBag.Title = L(LKConstants.FcmMessageLogs);
+    ViewBag.CurrentPageName = AdminCpPageNames.FcmMessageLogs;
+
+    var commonRef = new
+    {
+        ServiceName = "fcmMessageLog",
+        TableAction = "getAll",
+        CreateAction = "",
+        UpdateAction = "",
+        DeleteAction = "delete",
+        OnModalCreateShow = "",
+        OnModalCreateHide = "",
+        OnModalUpdateShow = "",
+        OnModalUpdateHide = "",
+        UpdateHtmlInnerAction = ""//Url.Action("EditModal", "FcmMessageLogs", new { Area = "AdminCP" })?.TrimStart('/')
+    }.ToJsonString(true);
 }
+@section scripts
+    {
+    <script src="~/Common/vinacent.db.js" asp-append-version="true"></script>
+    @*<script src="~/view-resources/Views/Fcm/FcmMessageLogs/Index.js" asp-append-version="true"></script>*@
+    }
+
+<section app-main-section="@commonRef">
+    <div class="card">
+        <div class="card-header">
+            Try Send
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    send by topic
+                    <form method="post" asp-action="SendByTopic" asp-controller="FcmMessageLogs" asp-area="@nameof(VinaCent.Blaze.Web.Areas.AdminCP)" role="form" class="form-horizontal">
+                        <div class="required mb-3">
+                            <label class="form-label" asp-for="Token"></label>
+                            <select class="form-control" asp-for="Token" asp-items="@ViewBag.TopicSelectList">
+                            </select>
+                            <span asp-validation-for="Token" class="invalid-feedback"></span>
+                        </div>
+                        <div class="required mb-3">
+                            <label class="form-label" asp-for="Title"></label>
+                            <input type="text" asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="invalid-feedback"></span>
+                        </div>
+                        <div class="required mb-3">
+                            <label class="form-label" asp-for="Message"></label>
+                            <textarea asp-for="Message" class="form-control"></textarea>
+                            <span asp-validation-for="Message" class="invalid-feedback"></span>
+                        </div>
+                        <div class="justify-content-between">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light save-button">@L(LKConstants.Save)</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-6">
+                    send by token
+                    <form method="post" asp-action="SendByToken" asp-controller="FcmMessageLogs" asp-area="@nameof(VinaCent.Blaze.Web.Areas.AdminCP)" role="form" class="form-horizontal">
+                        <div class="required mb-3">
+                            <label class="form-label" asp-for="Token"></label>
+                            <input type="text" asp-for="Token" class="form-control" />
+                            <span asp-validation-for="Token" class="invalid-feedback"></span>
+                        </div>
+                        <div class="required mb-3">
+                            <label class="form-label" asp-for="Title"></label>
+                            <input type="text" asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="invalid-feedback"></span>
+                        </div>
+                        <div class="required mb-3">
+                            <label class="form-label" asp-for="Message"></label>
+                            <textarea asp-for="Message" class="form-control"></textarea>
+                            <span asp-validation-for="Message" class="invalid-feedback"></span>
+                        </div>
+                        <div class="justify-content-between">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light save-button">@L(LKConstants.Save)</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section app-main-section="@commonRef">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                @*<div class="col-md-6">
+                    <button type="button" class="btn btn-success waves-effect waves-light mb-3 mb-lg-0 create-btn" data-quick-key="F2">
+                        <i class="fa fa-plus-square"></i>
+                        @L(LKConstants.Create)
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    @await Html.PartialAsync("~/Areas/AdminCP/Views/FcmMessageLogs/Index.AdvancedSearch.cshtml")
+                </div>*@
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="FcmMessageLogsTable" class="table table-striped table-bordered main-table">
+                    <thead>
+                        <tr>
+                            <th data-ref="@nameof(FcmMessageLogDto.Title).ToCamelCase()">@L(LKConstants.Title)</th>
+                            <th data-ref="@nameof(FcmMessageLogDto.Body).ToCamelCase()">@L(LKConstants.Content)</th>
+                            <th data-ref="@nameof(FcmMessageLogDto.TopicId).ToCamelCase()">@L("TopicId")</th>
+                            <th data-ref="@nameof(FcmMessageLogDto.Token).ToCamelCase()">@L("Token")</th>
+                            <th data-ref="@nameof(FcmMessageLogDto.CreationTime).ToCamelCase()">@L(LKConstants.CreationTime)</th>
+                            <th data-action="" data-primary="@nameof(LanguageDto.Id).ToCamelCase()" data-name="@nameof(LanguageDto.Name).ToCamelCase()" style="width: 150px">@L(LKConstants.Actions)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

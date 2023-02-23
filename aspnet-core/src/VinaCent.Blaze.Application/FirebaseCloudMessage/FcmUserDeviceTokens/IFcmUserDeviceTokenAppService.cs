@@ -11,5 +11,6 @@ namespace VinaCent.Blaze.FirebaseCloudMessage.FcmUserDeviceTokens
 {
     public interface IFcmUserDeviceTokenAppService : IAsyncCrudAppService<FcmUserDeviceTokenDto, Guid>
     {
+        Task<FcmUserDeviceTokenDto> AddToken(FcmUserDeviceTokenDto token);
     }
 }
